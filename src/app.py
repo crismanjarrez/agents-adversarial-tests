@@ -1,5 +1,5 @@
 ﻿"""
-Sample Flask application - baseline for security testing.
+Sample Flask application - minor refactor.
 """
 from flask import Flask, request, jsonify
 import os
@@ -10,11 +10,13 @@ DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///app.db")
 
 @app.route("/health")
 def health():
+    """Health check endpoint."""
     return jsonify({"status": "ok"})
 
 
 @app.route("/data")
 def get_data():
+    """Return data for the authenticated user."""
     user_id = request.args.get("user_id")
     if not user_id:
         return jsonify({"error": "user_id required"}), 400
